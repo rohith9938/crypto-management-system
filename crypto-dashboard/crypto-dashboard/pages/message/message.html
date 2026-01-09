@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NINAR | Message Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="./message.css">
+
+
+</head>
+<body>
+
+<div class="app">
+    <div class="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-left">
+                
+
+                <a href="/main-index.html" class="back-button">
+                    <i class="uil uil-arrow-left"></i>
+                    <span>Back to dashboard</span>
+                </a>
+                <div class="logo-mark">
+                    <img src="/assets/images/ninar logo.png" alt="logo">
+                </div>
+                <div class="topbar-text">
+                    <h1>Message Center</h1>
+                    <span>System alerts, support threads & security messages</span>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <span class="pill">
+                    <i class="uil uil-envelope-check"></i>
+                    Inbox hub
+                </span>
+                <button class="icon-button" id="themeToggle" title="Toggle theme">
+                    <i class="uil uil-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main class="main">
+            <section class="message-layout">
+                <section class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2>Conversations</h2>
+                            <span class="sub">All notifications & support chats</span>
+                        </div>
+                        <div class="filter-tabs" id="filterTabs">
+                            <button type="button" class="active" data-filter="all">All</button>
+                            <button type="button" data-filter="system">System</button>
+                            <button type="button" data-filter="support">Support</button>
+                            <button type="button" data-filter="security">Security</button>
+                        </div>
+                    </div>
+
+                    <div class="conv-search-box">
+                        <input type="text" id="convSearchInput" class="conv-search-input"
+                               placeholder="Search messages or threads">
+                    </div>
+
+                    <div class="conversations-header">
+                        <span id="convSummary">0 conversations</span>
+                        <button type="button" class="secondary-btn" id="newConvBtn">
+                            <i class="uil uil-plus"></i><span>New message</span>
+                        </button>
+                    </div>
+
+                    <div class="conversation-list" id="conversationList"></div>
+                </section>
+
+                <!-- RIGHT: chat detail -->
+                <section class="card">
+                    <div class="chat-container" id="chatContainer">
+                        <!-- Filled by JS -->
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
+</div>
+
+<!-- New Conversation Modal -->
+<div class="modal-backdrop" id="newConvModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>Start new conversation</h3>
+            <button type="button" id="closeModalBtn"><i class="uil uil-times"></i></button>
+        </div>
+        <form id="newConvForm">
+            <div class="modal-body">
+                <label>
+                    Email address
+                    <input type="email" id="newConvEmail" placeholder="you@example.com" required>
+                </label>
+                <label>
+                    Phone number
+                    <input type="tel" id="newConvPhone" placeholder="+91 98765 43210" required>
+                </label>
+                <label>
+                    Topic / subject
+                    <input type="text" id="newConvSubject" placeholder="Eg. Question about my portfolio">
+                </label>
+                <label>
+                    Initial message
+                    <textarea id="newConvBody" placeholder="Describe your issue or question..."></textarea>
+                </label>
+                <div class="modal-footnote">
+                    This information is stored only in your browser (localStorage) for demo purposes.
+                </div>
+                <div class="error-text" id="newConvError" style="display:none;"></div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-ghost" id="cancelModalBtn">Cancel</button>
+                <button type="submit" class="btn-primary">Start chat</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="./message.js"></script>
+
+</body>
+</html>

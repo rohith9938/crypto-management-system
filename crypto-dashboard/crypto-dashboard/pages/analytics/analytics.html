@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NINAR | Analytics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./analytics.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<div class="app">
+    <div class="main-wrapper">
+        <header class="header">
+            <nav class="nav">
+                <div class="nav-left">
+                    <a href="/main-index.html" class="nav-back">
+                        <i class="uil uil-arrow-left"></i>
+                        <span>Back to Dashboard</span>
+                    </a>
+
+                    <a href="/main-index.html" class="nav-logo">
+                        <img src="/assets/images/ninar logo.png" alt="logo">
+                    </a>
+                </div>
+
+                <div class="nav-actions">
+                    <span class="nav-pill">
+                        <i class="uil uil-chart-line"></i>
+                        Live analytics
+                    </span>
+                    <button class="nav_theme-btn" type="button">
+                        <i class="uil uil-moon"></i>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- MAIN -->
+        <main class="main">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <div class="topbar-title">Analytics</div>
+                    <div class="topbar-breadcrumb">Overview / Analytics</div>
+                </div>
+
+                <div class="topbar-right">
+                    <div class="search-box">
+                        <i class="uil uil-search"></i>
+                        <input type="text" placeholder="Search asset, metric, time range...">
+                    </div>
+
+                    <div class="topbar-date">
+                        <i class="uil uil-calender"></i>
+                        <span id="topbarDate">mm / dd / yyyy</span>
+                    </div>
+
+                    
+                </div>
+            </header>
+
+            <!-- KPI CARDS -->
+            <section class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span>Total Portfolio Value</span>
+                        <div class="kpi-icon blue"><i class="uil uil-analytics"></i></div>
+                    </div>
+                    <div class="kpi-value" id="portfolioValue">$1,742,562</div>
+                    <div class="kpi-sub">Across all wallets & exchanges</div>
+                    <div class="kpi-change positive" id="portfolioChange">+4.23% (24h)</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span>Realized PnL (30D)</span>
+                        <div class="kpi-icon green"><i class="uil uil-trend-up"></i></div>
+                    </div>
+                    <div class="kpi-value" id="realizedPnl">+$42,310</div>
+                    <div class="kpi-sub">Closed trades last 30 days</div>
+                    <div class="kpi-change positive" id="winRate">Win rate 63.4%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span>Risk Score</span>
+                        <div class="kpi-icon orange"><i class="uil uil-shield-check"></i></div>
+                    </div>
+                    <div class="kpi-value" id="riskScore">Moderate</div>
+                    <div class="kpi-sub">Based on volatility & drawdown</div>
+                    <div class="kpi-change negative" id="maxDrawdown">Max drawdown -18.9%</div>
+                </div>
+            </section>
+
+            <!-- TIME RANGE FILTERS -->
+            <div class="time-filter-row">
+                <button class="time-chip active" data-range="1D">1D</button>
+                <button class="time-chip" data-range="1W">1W</button>
+                <button class="time-chip" data-range="1M">1M</button>
+                <button class="time-chip" data-range="3M">3M</button>
+                <button class="time-chip" data-range="1Y">1Y</button>
+                <button class="time-chip" data-range="ALL">ALL</button>
+            </div>
+
+            <!-- MAIN ANALYTICS GRID -->
+            <section class="analytics-grid">
+                <!-- Left: Portfolio chart -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Portfolio Performance</div>
+                            <div class="card-subtitle">Value over time vs BTC benchmark.</div>
+                        </div>
+                        <span class="badge-soft">vs BTC index</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="portfolioChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Right: Allocation + Movers -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Asset Allocation</div>
+                            <div class="card-subtitle">Distribution by market value.</div>
+                        </div>
+                    </div>
+
+                    <div class="allocation-row">
+                        <div class="chart-container" style="height:220px;">
+                            <canvas id="allocationChart"></canvas>
+                        </div>
+                        <div class="allocation-legend">
+                            <div class="alloc-item">
+                                <div class="alloc-left">
+                                    <div class="dot" style="background:#f97316;"></div>
+                                    <span>Bitcoin (BTC)</span>
+                                </div>
+                                <span>42%</span>
+                            </div>
+                            <div class="alloc-item">
+                                <div class="alloc-left">
+                                    <div class="dot" style="background:#4b5563;"></div>
+                                    <span>Ethereum (ETH)</span>
+                                </div>
+                                <span>27%</span>
+                            </div>
+                            <div class="alloc-item">
+                                <div class="alloc-left">
+                                    <div class="dot" style="background:#22c55e;"></div>
+                                    <span>Stablecoins (USDT/USDC)</span>
+                                </div>
+                                <span>18%</span>
+                            </div>
+                            <div class="alloc-item">
+                                <div class="alloc-left">
+                                    <div class="dot" style="background:#6366f1;"></div>
+                                    <span>Altcoins</span>
+                                </div>
+                                <span>9%</span>
+                            </div>
+                            <div class="alloc-item">
+                                <div class="alloc-left">
+                                    <div class="dot" style="background:#fbbf24;"></div>
+                                    <span>Fiat / Cash</span>
+                                </div>
+                                <span>4%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="border:none;border-top:1px solid rgba(148,163,184,0.24);margin:0.9rem 0;">
+
+                    <div class="card-header" style="margin-bottom:0.2rem;">
+                        <div>
+                            <div class="card-title" style="font-size:0.9rem;">Top Movers (24h)</div>
+                            <div class="card-subtitle">Biggest gainers & losers in your holdings.</div>
+                        </div>
+                    </div>
+
+                    <div id="topMovers">
+                        <div class="mover-row">
+                            <div class="mover-left">
+                                <span class="mover-symbol">SOL</span>
+                                <span class="mover-price">$142.31</span>
+                            </div>
+                            <span class="mover-change positive">+11.4%</span>
+                        </div>
+                        <div class="mover-row">
+                            <div class="mover-left">
+                                <span class="mover-symbol">MATIC</span>
+                                <span class="mover-price">$0.89</span>
+                            </div>
+                            <span class="mover-change positive">+7.2%</span>
+                        </div>
+                        <div class="mover-row">
+                            <div class="mover-left">
+                                <span class="mover-symbol">DOGE</span>
+                                <span class="mover-price">$0.23</span>
+                            </div>
+                            <span class="mover-change positive">+5.1%</span>
+                        </div>
+                        <div class="mover-row">
+                            <div class="mover-left">
+                                <span class="mover-symbol">AVAX</span>
+                                <span class="mover-price">$32.44</span>
+                            </div>
+                            <span class="mover-change negative">-4.3%</span>
+                        </div>
+                        <div class="mover-row">
+                            <div class="mover-left">
+                                <span class="mover-symbol">ADA</span>
+                                <span class="mover-price">$0.46</span>
+                            </div>
+                            <span class="mover-change negative">-6.1%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Risk & Performance -->
+            <section class="card" style="margin-top:1rem;">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Risk & Performance</div>
+                        <div class="card-subtitle">Institutional-style stats based on your equity curve.</div>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-label">30D Volatility</span>
+                        <span class="metric-value" id="metricVolatility">18.4%</span>
+                        <span class="metric-tag" id="metricVolatilityTag">Above market</span>
+                    </div>
+
+                    <div class="metric-card">
+                        <span class="metric-label">Sharpe Ratio (1Y)</span>
+                        <span class="metric-value" id="metricSharpe">1.42</span>
+                        <span class="metric-tag" id="metricSharpeTag">Healthy</span>
+                    </div>
+
+                    <div class="metric-card">
+                        <span class="metric-label">Sortino Ratio (1Y)</span>
+                        <span class="metric-value" id="metricSortino">1.86</span>
+                        <span class="metric-tag" id="metricSortinoTag">Good downside control</span>
+                    </div>
+
+                    <div class="metric-card">
+                        <span class="metric-label">Max Drawdown (1Y)</span>
+                        <span class="metric-value" id="metricMdd">-23.7%</span>
+                        <span class="metric-tag" id="metricMddTag" style="color:#dc2626;">Watch risk</span>
+                    </div>
+
+                    <div class="metric-card">
+                        <span class="metric-label">Avg Trade Duration</span>
+                        <span class="metric-value" id="metricDuration">3.4 days</span>
+                        <span class="metric-tag" id="metricDurationTag">Swing trading</span>
+                    </div>
+
+                    <div class="metric-card">
+                        <span class="metric-label">Exposure</span>
+                        <span class="metric-value" id="metricExposure">81% invested</span>
+                        <span class="metric-tag" id="metricExposureTag">19% in cash</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+
+<script src="./analytics.js"></script>
+</body>
+</html>

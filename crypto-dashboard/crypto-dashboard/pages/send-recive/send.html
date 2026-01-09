@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Send Crypto</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.1.0/css/line.css">
+<link rel="stylesheet" href="./send.css">
+
+</head>
+
+<body>
+
+<div class="page">
+    <div class="container">
+        <div class="title">Send</div>
+        <div class="subtitle">Transfer digital assets securely to another wallet.</div>
+
+        <div class="layout">
+            
+            <div class="col">
+                <form id="sendForm">
+
+                    <div class="form-group">
+                        <label>From Wallet</label>
+                        <select id="fromWallet">
+                            <option>Main Wallet • 0xA1B2...9F3E</option>
+                            <option>Trading Wallet • 0xC8D4...8A12</option>
+                            <option>Savings Wallet • 0x9F0C...4B7D</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Asset</label>
+                        <select id="asset">
+                            <option value="BTC">BTC - Bitcoin</option>
+                            <option value="ETH">ETH - Ethereum</option>
+                            <option value="USDT">USDT - Tether</option>
+                            <option value="BNB">BNB - Binance Coin</option>
+                            <option value="XRP">XRP - Ripple</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Blockchain Network</label>
+                        <select id="network">
+                            <option>Bitcoin</option>
+                            <option>Ethereum (ERC-20)</option>
+                            <option>BNB Smart Chain (BEP-20)</option>
+                            <option>Polygon</option>
+                            <option>Solana</option>
+                        </select>
+                        <div class="hint">Network must match the recipient wallet’s supported network.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Recipient Wallet Address</label>
+                        <input type="text" id="address" placeholder="Enter or paste wallet address">
+                        <div class="hint">Always double-check the address. Crypto transfers are irreversible.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Memo / Tag (Optional)</label>
+                        <input type="text" id="memo" placeholder="Required for XRP, BNB, exchanges...">
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="number" id="amount" placeholder="0.0000" min="0" step="0.00000001">
+                        </div>
+                        <div class="form-group">
+                            <label>Fee Priority</label>
+                            <select id="priority">
+                                <option value="0.5">Slow (Low Fee)</option>
+                                <option value="1" selected>Normal</option>
+                                <option value="2">Fast (High Fee)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Payment Purpose (Optional)</label>
+                        <textarea id="purpose" placeholder="Eg: Rent, salary, personal transfer..."></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>2FA Code</label>
+                            <input type="text" id="twofa" maxlength="6" placeholder="123456">
+                        </div>
+                        <div class="form-group" style="margin-top:28px;">
+                            <label style="font-size:0.8rem;">
+                                <input type="checkbox" id="confirm" style="width:auto;margin-right:6px;">
+                                I confirm I have verified the address.
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="button">
+                        <button type="submit" class="send-btn">Send</button>
+                        <a class="cancel" href="../wallet/wallet.html">Cancel</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col">
+                <div class="side-card">
+                    <div class="side-title">Transaction Summary</div>
+                    <div class="side-sub">Auto calculated based on your inputs.</div>
+                    <div class="summary-line">Asset: <span id="sumAsset">BTC</span></div>
+                    <div class="summary-line">Network: <span id="sumNetwork">Bitcoin</span></div>
+                    <div class="summary-line">From: <span id="sumFrom">Main Wallet</span></div>
+                    <div class="summary-line">To: <span id="sumTo">—</span></div>
+                    <div class="summary-line">Amount: <span id="sumAmount">0.0000</span></div>
+                    <div class="summary-line">Fee: <span id="sumFee">0.000000</span></div>
+                    <div class="summary-line">Total: <span id="sumTotal">0.000000</span></div>
+
+                    <button type="button" class="bill-btn" id="billBtn">
+                        <i class="uil uil-file-download"></i> Download Draft Bill
+                    </button>
+
+                    <div class="security">
+                        <i class="uil uil-shield-check"></i>
+                        Withdrawals may be delayed if risk controls trigger.
+                    </div>
+                </div>
+
+                <div class="friend-card">
+                    <div class="side-title">Quick Send</div>
+                    <div class="side-sub">Use saved recipient contacts.</div>
+
+                    <div class="friend-row" data-addr="0xF3A1B2C3D4E5F6A1B2C3D4E5123456" data-name="Arjun Kumar">
+                        <div class="friend-left">
+                            <div class="friend-avatar">AK</div>
+                            <div>
+                                <div>Arjun Kumar</div>
+                                <div class="friend-handle">@arjun.eth</div>
+                            </div>
+                        </div>
+                        <button class="friend-btn">Fill</button>
+                    </div>
+
+                    <div class="friend-row" data-addr="bc1qexample456aaa" data-name="Sneha">
+                        <div class="friend-left">
+                            <div class="friend-avatar">SR</div>
+                            <div>
+                                <div>Sneha</div>
+                                <div class="friend-handle">@sneha.btc</div>
+                            </div>
+                        </div>
+                        <button class="friend-btn">Fill</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- SUCCESS POPUP -->
+<div id="successModal" class="modal">
+    <div class="modal-card">
+        <i class="uil uil-check-circle"></i>
+        <h2>Transaction Sent</h2>
+        <p>Your crypto was successfully sent.</p>
+        <button onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+
+<script src="./send.js"></script>
+
+</body>
+</html>

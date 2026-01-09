@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NINAR | Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="./settings.css">
+
+    <style>
+        
+    </style>
+</head>
+<body>
+
+<div class="app">
+    <div class="main-wrapper">
+        <header class="header">
+            <nav class="nav">
+                <div class="nav-left">
+                    <a href="/main-index.html" class="nav-back">
+                        <i class="uil uil-arrow-left"></i>
+                        <span>Back to Dashboard</span>
+                    </a>
+
+                    <a href="/main-index.html" class="nav-logo">
+                        <img src="/assets/images/ninar logo.png" alt="logo">
+                    </a>
+                </div>
+
+                <div class="nav-actions">
+                    <span class="nav-pill">
+                        <i class="uil uil-setting"></i>
+                        Settings
+                    </span>
+                    <button class="nav_theme-btn" type="button">
+                        <i class="uil uil-moon"></i>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main content -->
+        <main class="main">
+            <div class="settings-topbar">
+                <h1>Settings</h1>
+                <span>Manage profile, security, trading preferences, and privacy for your NINAR dashboard</span>
+            </div>
+
+            <section class="settings-grid">
+                <!-- LEFT COLUMN: Profile, Security, Trading -->
+                <div class="left-col">
+                    <!-- Profile -->
+                    <section class="card">
+                        <div class="card-header-inline">
+                            <div>
+                                <div class="card-title">Profile</div>
+                                <div class="card-sub">Basic details used across your dashboard</div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="settingName">Full name</label>
+                            <input id="settingName" type="text" placeholder="Your name">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="settingEmail">Email address</label>
+                            <input id="settingEmail" type="email" placeholder="name@example.com">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="settingUsername">Username</label>
+                            <input id="settingUsername" type="text" placeholder="@username">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="settingLanguage">Language</label>
+                            <select id="settingLanguage">
+                                <option value="en">English</option>
+                                <option value="hi">Hindi</option>
+                                <option value="es">Spanish</option>
+                                <option value="fr">French</option>
+                            </select>
+                        </div>
+                    </section>
+
+                    <!-- Security / Login -->
+                    <section class="card">
+                        <div class="card-header-inline">
+                            <div>
+                                <div class="card-title">Security & Login</div>
+                                <div class="card-sub">Protect your account and withdrawals</div>
+                            </div>
+                            <span class="badge-soft">Recommended</span>
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Two-Factor Authentication (2FA)</span>
+                                <span class="toggle-sub">Require an OTP from authenticator app when signing in</span>
+                            </div>
+                            <input type="checkbox" id="setting2FA">
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Login alerts</span>
+                                <span class="toggle-sub">Notify when a new device or browser logs in</span>
+                            </div>
+                            <input type="checkbox" id="settingLoginAlerts">
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Withdrawal address whitelist</span>
+                                <span class="toggle-sub">Allow withdrawals only to saved addresses (demo)</span>
+                            </div>
+                            <input type="checkbox" id="settingWhitelist">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="settingAntiPhishing">Anti-phishing code</label>
+                            <input id="settingAntiPhishing" type="text" placeholder="Code shown on official NINAR emails">
+                        </div>
+                    </section>
+
+                    <!-- Trading preferences -->
+                    <section class="card">
+                        <div class="card-header-inline">
+                            <div>
+                                <div class="card-title">Trading preferences</div>
+                                <div class="card-sub">Defaults for charts and order placement</div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="settingFiat">Default fiat currency</label>
+                            <select id="settingFiat">
+                                <option value="INR">INR – Indian Rupee</option>
+                                <option value="USD">USD – US Dollar</option>
+                                <option value="EUR">EUR – Euro</option>
+                                <option value="GBP">GBP – British Pound</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="settingTimeZone">Preferred time zone</label>
+                            <select id="settingTimeZone">
+                                <option value="local">Use device time</option>
+                                <option value="UTC">UTC</option>
+                                <option value="IST">IST (UTC+05:30)</option>
+                                <option value="EST">EST (UTC-05:00)</option>
+                            </select>
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Order confirmation dialogs</span>
+                                <span class="toggle-sub">Ask before placing market / large orders</span>
+                            </div>
+                            <input type="checkbox" id="settingOrderConfirm">
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Enable one-click trading (demo)</span>
+                                <span class="toggle-sub">Place small orders without additional confirmation</span>
+                            </div>
+                            <input type="checkbox" id="settingOneClick">
+                        </div>
+                    </section>
+                </div>
+
+                <!-- RIGHT COLUMN: Notifications, Privacy, Danger Zone -->
+                <div class="right-col">
+                    <!-- Notifications -->
+                    <section class="card">
+                        <div class="card-header-inline">
+                            <div>
+                                <div class="card-title">Notifications</div>
+                                <div class="card-sub">System, price, and product updates</div>
+                            </div>
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Price alerts</span>
+                                <span class="toggle-sub">Notify when tracked coins move by large %</span>
+                            </div>
+                            <input type="checkbox" id="settingPriceAlerts">
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Critical security emails</span>
+                                <span class="toggle-sub">Password changes, new logins, withdrawal requests</span>
+                            </div>
+                            <input type="checkbox" id="settingSecurityEmails">
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Product updates & announcements</span>
+                                <span class="toggle-sub">New features, UI changes, release notes</span>
+                            </div>
+                            <input type="checkbox" id="settingProductEmails">
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Marketing & promotions</span>
+                                <span class="toggle-sub">Optional campaigns, referral bonuses, airdrops (demo)</span>
+                            </div>
+                            <input type="checkbox" id="settingMarketingEmails">
+                        </div>
+                    </section>
+
+                    <!-- Display / Privacy -->
+                    <section class="card">
+                        <div class="card-header-inline">
+                            <div>
+                                <div class="card-title">Display & privacy</div>
+                                <div class="card-sub">How balances and PnL are shown</div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="settingThemePref">Chart / dashboard theme</label>
+                            <select id="settingThemePref">
+                                <option value="system">Follow app theme</option>
+                                <option value="light">Light charts</option>
+                                <option value="dark">Dark charts</option>
+                            </select>
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Mask balances by default</span>
+                                <span class="toggle-sub">Blur total portfolio when sharing screen</span>
+                            </div>
+                            <input type="checkbox" id="settingMaskBalances">
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Hide small balances</span>
+                                <span class="toggle-sub">Filter tokens below a defined value</span>
+                            </div>
+                            <input type="checkbox" id="settingHideDust">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="settingSessionTimeout">Auto-logout timer</label>
+                            <select id="settingSessionTimeout">
+                                <option value="15">15 minutes</option>
+                                <option value="30">30 minutes</option>
+                                <option value="60">1 hour</option>
+                                <option value="0">Never (not recommended)</option>
+                            </select>
+                        </div>
+
+                        <div class="toggle-row">
+                            <div class="toggle-main">
+                                <span class="toggle-title">Reduce motion</span>
+                                <span class="toggle-sub">Limit animations and transitions</span>
+                            </div>
+                            <input type="checkbox" id="settingReduceMotion">
+                        </div>
+                    </section>
+
+                    <!-- Save + danger zone -->
+                    <section class="card danger-card">
+                        <div class="danger-title">
+                            <i class="uil uil-shield-exclamation"></i> Danger zone (demo)
+                        </div>
+                        <div class="danger-sub">
+                            Actions here affect only local demo data stored in this browser.
+                        </div>
+
+                        <div class="danger-actions">
+                            <button class="danger-btn secondary" id="btnResetSettings">
+                                <i class="uil uil-history-alt"></i>
+                                Reset settings to defaults
+                            </button>
+                            <button class="danger-btn" id="btnClearAll">
+                                <i class="uil uil-trash-alt"></i>
+                                Clear all NINAR demo data
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- Global save bar -->
+            <section class="card" style="margin-top:1.2rem;">
+                <div class="save-row">
+                    <button class="save-btn" id="btnSaveSettings">
+                        <i class="uil uil-save"></i>
+                        <span>Save all changes</span>
+                    </button>
+                    <button class="reset-btn" id="btnSoftReset">
+                        <i class="uil uil-processor"></i>
+                        Reset unsaved changes
+                    </button>
+                    <span class="save-status" id="saveStatus"></span>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+
+<script src="./settings.js"></script>
+
+</body>
+</html>

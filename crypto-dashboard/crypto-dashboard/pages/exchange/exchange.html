@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NINAR | Exchange</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="./exchange.css">
+    <!-- <link rel="stylesheet" href="/main-style.css"> -->
+
+</head>
+<body>
+
+<div class="layout">
+    <main class="main">
+
+        <header class="top-bar">
+            <div class="top-left">
+                <a href="/main-index.html" class="back-button">
+                    <i class="uil uil-arrow-left"></i>
+                    <span>Back to dashboard</span>
+                </a>
+                <div class="logo-slot">
+                    <img src="/assets/images/ninar logo.png" alt="logo">
+                    <!-- <i class="uil uil-bitcoin-circle"></i> -->
+                    <!-- <span>Logo</span> -->
+                </div>
+            </div>
+
+            <div class="top-center">
+                <div class="pair-indicator">
+                    <div class="pair-symbol">
+                        <div class="pair-symbol-badge" id="pairBaseBadge">B</div>
+                        <div class="pair-symbol-text" id="pairSymbolText">BTC / USDT</div>
+                    </div>
+                    <div class="pair-price">
+                        <span id="pairLastPrice">$0.00</span>
+                    </div>
+                    <div class="pair-change" id="pairChange">+0.00%</div>
+                    <div class="pill-neutral">
+                        <i class="uil uil-signal-alt-3"></i>
+                        Live
+                    </div>
+                </div>
+            </div>
+
+            <div class="top-right">
+                <span class="pill">
+                    <i class="uil uil-shield-check"></i>
+                    Secured Trading
+                </span>
+                <button class="icon-button" id="themeToggle" title="Toggle theme">
+                    <i class="uil uil-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <section class="exchange-layout">
+            <div class="left-column">
+                <div class="card">
+                    <div class="chart-card">
+                        <div class="chart-toolbar">
+                            <div class="chart-toolbar-left">
+                                <span style="font-size:13px; font-weight:600;" id="chartPairLabel">BTC / USDT</span>
+                                <span style="font-size:12px;color:var(--text-muted);">Spot price mini chart</span>
+                            </div>
+                            <div class="timeframe-tabs">
+                                <button class="timeframe-tab active" data-tf="1d">1D</button>
+                                <button class="timeframe-tab" data-tf="7d">7D</button>
+                                <button class="timeframe-tab" data-tf="30d">30D</button>
+                                <button class="timeframe-tab" data-tf="90d">90D</button>
+                                <button class="timeframe-tab" data-tf="365d">1Y</button>
+                            </div>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="priceChart"></canvas>
+                            <div class="chart-overlay-label">
+                                Live mini chart.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Markets</div>
+                            <div class="card-sub">Spot pairs, 24h move & volume.</div>
+                        </div>
+                        <div style="font-size:11px; color:var(--text-muted); display:flex;align-items:center;gap:6px;">
+                            <i class="uil uil-star"></i> Favorites
+                        </div>
+                    </div>
+
+                    <div class="market-tabs">
+                        <button class="market-tab active" data-tab="all">All</button>
+                        <button class="market-tab" data-tab="favorites"><i class="uil uil-star"></i> Favorites</button>
+                        <button class="market-tab" data-tab="btc">BTC</button>
+                        <button class="market-tab" data-tab="alts">ETH</button>
+                        <button class="market-tab" data-tab="defi">EUR</button>
+                    </div>
+
+                    <div class="market-search">
+                        <input type="text" id="marketSearch" placeholder="Search by pair or symbol…">
+                    </div>
+
+                    <div style="max-height:260px; overflow-y:auto;">
+                        <table class="markets-table">
+                            <thead>
+                            <tr>
+                                <th style="width:20px;"></th>
+                                <th>Pair</th>
+                                <th>Last price</th>
+                                <th>24h %</th>
+                                <th>24h Vol</th>
+                            </tr>
+                            </thead>
+                            <tbody id="marketsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="card trade-panel">
+                    <div class="card-header" style="margin-bottom:4px;">
+                        <div class="card-title">Place order</div>
+                        <div class="card-sub">Purchase</div>
+                    </div>
+
+                    <div class="side-toggle">
+                        <button class="active buy" id="btnBuySide">Buy</button>
+                        <button class="sell" id="btnSellSide">Sell</button>
+                    </div>
+
+                    <div class="order-type-row">
+                        <span class="order-type-pill active" data-type="market">Market</span>
+                        <span class="order-type-pill" data-type="limit">Limit</span>
+                        <span class="order-type-pill" data-type="stop">Stop</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span>Price</span>
+                            <span id="priceLabelRight" style="color:var(--text-muted);font-size:11px;">Market</span>
+                        </label>
+                        <div class="form-input">
+                            <input type="number" id="inputPrice" placeholder="Market price" step="0.01" min="0">
+                            <span class="unit" id="priceUnit">USDT</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span>Amount</span>
+                            <span id="balanceLabel">Balance: 827,119 BTC</span>
+                        </label>
+                        <div class="form-input">
+                            <input type="number" id="inputAmount" placeholder="0.0000" step="0.0001" min="0">
+                            <span class="unit" id="amountUnit">BTC</span>
+                        </div>
+                    </div>
+
+                    <div class="slider-row">
+                        <input type="range" id="amountSlider" min="0" max="100" value="0">
+                        <div class="trade-meta">
+                            <span>Size: <span id="sliderPercent">0%</span></span>
+                            <span>Fee (taker): 0.10%</span>
+                        </div>
+                    </div>
+
+                    <div class="trade-total">
+                        <span>Total</span>
+                        <span id="totalValue">0.00 USDT</span>
+                    </div>
+
+                    <button class="btn-submit buy" id="btnPlaceOrder">Buy BTC</button>
+
+                    <div class="trade-note">
+                        This is a paper-trading environment. Orders & balances are simulated and stored locally.
+                    </div>
+                </div>
+
+                <div class="right-lower-grid">
+                    <div class="card">
+                        <div class="card-header" style="margin-bottom:6px;">
+                            <div class="card-title">Order book & Recent trades</div>
+                            <div class="card-sub">Simulated depth & trade flow based on live price.</div>
+                        </div>
+                        <div class="depth-trades">
+                            <div>
+                                <div class="depth-header-row">
+                                    <span>Price</span><span>Amount</span><span>Total</span>
+                                </div>
+                                <div class="depth-list" id="orderBookList"></div>
+                            </div>
+                            <div>
+                                <div class="trade-header-row">
+                                    <span>Time</span><span>Price</span><span>Amount</span>
+                                </div>
+                                <div class="trades-list" id="tradesList"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Open & filled orders</div>
+                            <div class="card-sub">Stored locally, persists between sessions.</div>
+                        </div>
+                        <div style="max-height:170px; overflow-y:auto;">
+                            <table class="orders-table">
+                                <thead>
+                                <tr>
+                                    <th>Pair</th>
+                                    <th>Side</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody id="ordersBody">
+                                <tr>
+                                    <td colspan="6" style="font-size:11px;color:var(--text-muted);padding-top:4px;">
+                                        No orders yet. Place a Buy or Sell to see it here.
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="./exchange.js"></script>
+<script src="/main-script.js"></script>
+
+</body>
+</html>
